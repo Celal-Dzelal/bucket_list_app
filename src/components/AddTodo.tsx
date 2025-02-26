@@ -1,25 +1,49 @@
 import { Box, Button, Paper, TextField } from "@mui/material";
 import { useState } from "react";
 
-const AddTodo = () => {
-  const [task, setTask] = useState(""); //* This state is used to store the value entered by the user in the TextField component. When the user types, the handleChange function updates the state using setTask.
+interface IAddTodo {
+  addTodo: AddFn;
+}
+
+const AddTodo: React.FC<IAddTodo> = ({ addTodo }) => {
+  const [task, setTask] = useState("");
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     setTask(e.target.value);
-  }; //* It updates the task state to store user's input.
+  };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(task);
-  }; //* The value typed in TextField is stored in the task state via handleChange
+    addTodo(task);
+    setTask("");
+  };
 
   return (
     <Paper>
-      <Box component="form" onSubmit={handleSubmit}>
-        <TextField onChange={handleChange} />
-        <Button type="submit">Save</Button>
+      <Box
+        component="form"
+        onSubmit={handleSubmit}
+        sx={{
+          display: "flex",
+          justifyContent: "space-around",
+          alignItems: "center",
+          gap: "10px",
+          padding: "0 10px",
+        }}
+      >
+        <TextField onChange={handleChange} fullWidth />
+        <Button
+          type="submit"
+          sx={{
+            border: "2px solid #66A4E1",
+            backgroundColor: "#242424",
+            color: "white",
+          }}
+        >
+          Save
+        </Button>
       </Box>
     </Paper>
   );

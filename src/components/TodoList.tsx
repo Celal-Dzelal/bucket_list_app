@@ -1,10 +1,13 @@
 import { Grid, Typography } from "@mui/material";
+import TodoListItems from "./TodoListItems";
 
 interface ITodoList {
-  todos: ITodo;
+  todos: ITodo[];
 }
 
-const TodoList: React.FC<ITodoList> = (todos) => {
+const TodoList: React.FC<ITodoList> = ({ todos }) => {
+  const inProgress = todos.filter((todo) => todo.isDone === false);
+  const completed = todos.filter((todo) => todo.isDone === true);
   return (
     <Grid
       container
@@ -41,8 +44,13 @@ const TodoList: React.FC<ITodoList> = (todos) => {
           variant="h5"
           sx={{ mb: 1 }}
         >
-          In Progress Todos
+          Progress
         </Typography>
+        {inProgress.length ? (
+          inProgress.map((todo) => <TodoListItems key={todo.id} todo={todo} />)
+        ) : (
+          <Typography>No Task</Typography>
+        )}
       </Grid>
       <Grid
         item
@@ -70,8 +78,13 @@ const TodoList: React.FC<ITodoList> = (todos) => {
           variant="h5"
           sx={{ mb: 1 }}
         >
-          Completed Todos
+          Completed
         </Typography>
+        {completed.length ? (
+          completed.map((todo) => <TodoListItems key={todo.id} todo={todo} />)
+        ) : (
+          <Typography>No Task</Typography>
+        )}
       </Grid>
     </Grid>
   );

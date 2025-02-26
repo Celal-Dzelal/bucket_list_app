@@ -21,6 +21,15 @@ const Home = () => {
     setTodos(data);
   };
 
+  const addTodo: AddFn = async (task) => {
+    try {
+      await axios.post(apiUrl, { task, isDone: false });
+      getTodo();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     getTodo();
   }, []);
@@ -28,7 +37,7 @@ const Home = () => {
   return (
     <div>
       <Header />
-      <AddTodo />
+      <AddTodo addTodo={addTodo} />
       <TodoList todos={todos} />
     </div>
   );
