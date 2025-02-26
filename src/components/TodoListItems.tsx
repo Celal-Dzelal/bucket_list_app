@@ -3,11 +3,25 @@ import { DeleteOutline } from "@mui/icons-material";
 
 interface ITodoListItems {
   todo: ITodo;
+  toggleTodo: ToggleFn;
 }
 
-const TodoListItems = ({ todo }: ITodoListItems) => {
+const TodoListItems = ({ todo, toggleTodo }: ITodoListItems) => {
   return (
     <ListItem
+      sx={{
+        marginTop: "0.3rem",
+        padding: "1rem",
+        cursor: "pointer",
+        backgroundColor: todo.isDone ? "#d4edda" : "#f3e5f5",
+        borderRadius: "0.5rem",
+        boxShadow: "0px 4px 8px rgba(0,0,0,0.1)",
+        transition: "all 0.3s ease-in-out",
+        "&:hover": {
+          backgroundColor: todo.isDone ? "#c3e6cb" : "#e1bee7",
+          transform: "scale(1.02)",
+        },
+      }}
       secondaryAction={
         <IconButton>
           <DeleteOutline
@@ -20,7 +34,15 @@ const TodoListItems = ({ todo }: ITodoListItems) => {
         </IconButton>
       }
     >
-      <ListItemText primary={todo.task} />
+      <ListItemText
+        primary={todo.task}
+        onClick={() => toggleTodo(todo)}
+        sx={{
+          textDecoration: todo.isDone ? "line-through" : "none",
+          color: todo.isDone ? "#6c757d" : "#4a148c",
+          fontWeight: "bold",
+        }}
+      />
     </ListItem>
   );
 };

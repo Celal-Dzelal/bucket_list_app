@@ -30,6 +30,18 @@ const Home = () => {
     }
   };
 
+  const toggleTodo: ToggleFn = async (todo) => {
+    try {
+      await axios.put(`${apiUrl}/${todo.id}`, {
+        ...todo,
+        isDone: !todo.isDone,
+      });
+      getTodo();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     getTodo();
   }, []);
@@ -38,7 +50,7 @@ const Home = () => {
     <div>
       <Header />
       <AddTodo addTodo={addTodo} />
-      <TodoList todos={todos} />
+      <TodoList todos={todos} toggleTodo={toggleTodo} />
     </div>
   );
 };
