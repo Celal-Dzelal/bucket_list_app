@@ -4,9 +4,10 @@ import { DeleteOutline } from "@mui/icons-material";
 interface ITodoListItems {
   todo: ITodo;
   toggleTodo: ToggleFn;
+  deleteTodo: DeleteFn;
 }
 
-const TodoListItems = ({ todo, toggleTodo }: ITodoListItems) => {
+const TodoListItems = ({ todo, toggleTodo, deleteTodo }: ITodoListItems) => {
   return (
     <ListItem
       sx={{
@@ -23,7 +24,7 @@ const TodoListItems = ({ todo, toggleTodo }: ITodoListItems) => {
         },
       }}
       secondaryAction={
-        <IconButton>
+        <IconButton onClick={() => deleteTodo(todo.id)}>
           <DeleteOutline
             sx={{
               color: "#d32f2f",

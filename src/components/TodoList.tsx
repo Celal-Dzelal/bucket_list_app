@@ -4,9 +4,10 @@ import TodoListItems from "./TodoListItems";
 interface ITodoList {
   todos: ITodo[];
   toggleTodo: ToggleFn;
+  deleteTodo: DeleteFn;
 }
 
-const TodoList: React.FC<ITodoList> = ({ todos, toggleTodo }) => {
+const TodoList: React.FC<ITodoList> = ({ todos, toggleTodo, deleteTodo }) => {
   const inProgress = todos.filter((todo) => todo.isDone === false);
   const completed = todos.filter((todo) => todo.isDone === true);
   return (
@@ -49,7 +50,12 @@ const TodoList: React.FC<ITodoList> = ({ todos, toggleTodo }) => {
         </Typography>
         {inProgress.length ? (
           inProgress.map((todo) => (
-            <TodoListItems key={todo.id} todo={todo} toggleTodo={toggleTodo} />
+            <TodoListItems
+              key={todo.id}
+              todo={todo}
+              toggleTodo={toggleTodo}
+              deleteTodo={deleteTodo}
+            />
           ))
         ) : (
           <Typography>No Task</Typography>
@@ -84,7 +90,9 @@ const TodoList: React.FC<ITodoList> = ({ todos, toggleTodo }) => {
           Completed
         </Typography>
         {completed.length ? (
-          completed.map((todo) => <TodoListItems key={todo.id} todo={todo} />)
+          completed.map((todo) => (
+            <TodoListItems key={todo.id} todo={todo} deleteTodo={deleteTodo} />
+          ))
         ) : (
           <Typography>No Task</Typography>
         )}
