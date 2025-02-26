@@ -7,19 +7,24 @@ interface ITodoListItems {
   deleteTodo: DeleteFn;
 }
 
-const TodoListItems = ({ todo, toggleTodo, deleteTodo }: ITodoListItems) => {
+const TodoListItems: React.FC<ITodoListItems> = ({
+  todo,
+  toggleTodo,
+  deleteTodo,
+}: ITodoListItems) => {
   return (
     <ListItem
       sx={{
         marginTop: "0.3rem",
         padding: "1rem",
         cursor: "pointer",
-        backgroundColor: todo.isDone ? "#d4edda" : "#f3e5f5",
+        backgroundColor: todo.isDone ? "#B6BFBE" : "#F2F2F2",
         borderRadius: "0.5rem",
         boxShadow: "0px 4px 8px rgba(0,0,0,0.1)",
         transition: "all 0.3s ease-in-out",
+        alignItems: "flex-start",
         "&:hover": {
-          backgroundColor: todo.isDone ? "#c3e6cb" : "#e1bee7",
+          backgroundColor: todo.isDone ? "#F2F2F2" : "#B6BFBE",
           transform: "scale(1.02)",
         },
       }}
@@ -27,9 +32,9 @@ const TodoListItems = ({ todo, toggleTodo, deleteTodo }: ITodoListItems) => {
         <IconButton onClick={() => deleteTodo(todo.id)}>
           <DeleteOutline
             sx={{
-              color: "#d32f2f",
+              color: "#1A1A26",
               fontSize: "1.5rem",
-              "&:hover": { color: "red" },
+              "&:hover": { color: "white" },
             }}
           />
         </IconButton>
@@ -40,8 +45,10 @@ const TodoListItems = ({ todo, toggleTodo, deleteTodo }: ITodoListItems) => {
         onClick={() => toggleTodo(todo)}
         sx={{
           textDecoration: todo.isDone ? "line-through" : "none",
-          color: todo.isDone ? "#6c757d" : "#4a148c",
+          color: todo.isDone ? "#F29F05" : "#315a8f",
           fontWeight: "bold",
+          pr: "3rem",
+          wordBreak: "break-word",
         }}
       />
     </ListItem>

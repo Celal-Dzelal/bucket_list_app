@@ -30,7 +30,7 @@ const TodoList: React.FC<ITodoList> = ({ todos, toggleTodo, deleteTodo }) => {
           minHeight: "350px",
           maxHeight: "350px",
           overflow: "auto",
-          border: "1px solid purple",
+          border: "1px solid #315a8f",
           borderRadius: "0.5rem",
           boxShadow: "0px 4px 10px rgba(0,0,0,0.1)",
           p: 2,
@@ -40,13 +40,8 @@ const TodoList: React.FC<ITodoList> = ({ todos, toggleTodo, deleteTodo }) => {
           },
         }}
       >
-        <Typography
-          color="secondary"
-          align="center"
-          variant="h5"
-          sx={{ mb: 1 }}
-        >
-          Progress
+        <Typography color="#315a8f" align="center" variant="h5" sx={{ mb: 1 }}>
+          Pending Goals
         </Typography>
         {inProgress.length ? (
           inProgress.map((todo) => (
@@ -58,7 +53,7 @@ const TodoList: React.FC<ITodoList> = ({ todos, toggleTodo, deleteTodo }) => {
             />
           ))
         ) : (
-          <Typography>No Task</Typography>
+          <Typography>No Goal</Typography>
         )}
       </Grid>
       <Grid
@@ -71,7 +66,7 @@ const TodoList: React.FC<ITodoList> = ({ todos, toggleTodo, deleteTodo }) => {
           minHeight: "350px",
           maxHeight: "350px",
           overflow: "auto",
-          border: "1px solid purple",
+          border: "1px solid #F29F05",
           borderRadius: "0.5rem",
           boxShadow: "0px 4px 10px rgba(0,0,0,0.1)",
           p: 2,
@@ -81,20 +76,20 @@ const TodoList: React.FC<ITodoList> = ({ todos, toggleTodo, deleteTodo }) => {
           },
         }}
       >
-        <Typography
-          color="secondary"
-          align="center"
-          variant="h5"
-          sx={{ mb: 1 }}
-        >
-          Completed
+        <Typography color="#F29F05" align="center" variant="h5" sx={{ mb: 1 }}>
+          Achieved Goals
         </Typography>
         {completed.length ? (
           completed.map((todo) => (
-            <TodoListItems key={todo.id} todo={todo} deleteTodo={deleteTodo} />
+            <TodoListItems
+              key={todo.id}
+              todo={todo}
+              deleteTodo={deleteTodo}
+              toggleTodo={toggleTodo}
+            />
           ))
         ) : (
-          <Typography>No Task</Typography>
+          <Typography>No Goal</Typography>
         )}
       </Grid>
     </Grid>
